@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block title %} Sign-up {% endblock %}
+
+
+
+{% block content %}
+    <div class="wrapper fadeInDown mt-3">
+  <div id="formContent">
+    <!-- Tabs Titles -->
+
+    <!-- Icon -->
+    <form method="POST" action="">
+        {% csrf_token %}
+    <div class="fadeIn first"> <h4> <i class="fa fa-user"></i> Please sign-up to check all our posts</h4>
+
+    </div>
+
+      <div class="row mt-5 mb-5">
+
+          <div class="col-8 offset-2">
+                <input type="text" class="form-control" placeholder="Username" name="username">
+          </div>
+
+      </div>
+      <div class="row mt-5 mb-5">
+
+          <div class="col-8 offset-2">
+                <input type="password" class="form-control" placeholder="Password" name="password">
+          </div>
+
+      </div>
+
+
+      <div class="row mt-5 mb-5">
+
+          <div class="col-8 offset-2">
+                <button type="submit" class="btn btn-info"> Log in </button>
+          </div>
+
+      </div>
+    </form>
+
+
+    <!-- Remind Passowrd -->
+    <div id="formFooter">
+        <div class="row">
+            <div class="col-12 d-flex justify-content-center align-items-center">
+                {% for message in messages %}
+                    <p id="messages"> {{ message }} </p>
+                 {% endfor %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 d-flex justify-content-center align-items-center">
+                <a class="underlineHover" href="{% url 'top10:register' %}">No account? Register</a>
+            </div>
+        </div>
+       <div class="row">
+            <div class="col-12 d-flex justify-content-center align-items-center">
+                <a class="underlineHover" href="#">Forgot Password?</a>
+            </div>
+        </div>
+
+    </div>
+
+  </div>
+</div>
+ {% endblock %}
+
+

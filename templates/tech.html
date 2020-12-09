@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block title %} Top10 | Technologies {% endblock %}
+
+{% block content %}
+    {% for i in category %}
+        <h1 class="display 4"> {{ i.category_title }} </h1>
+     {% endfor %}
+    <div class="row">
+    <div class="col-9">
+    {% if output %}
+        {% for a in output %}
+
+            <div class="card mb-5 mt-5">
+              <img class="card-img-top" src="{{ a.picture_main.url }}" alt="Card image cap">
+              <div class="card-body">
+              <h5 class="card-title"><a href="{% url 'top10:detail' a.slug %}" class="text-secondary">{{a.subject}}</a></h5>
+                <p class="card-text">{{a.title_description}}</p>
+                <p class="card-text"><small class="text-muted">{{ a.date_created }}</small></p>
+              </div>
+            </div>
+
+        {% endfor %}
+                </div>
+        <div class="col-3">
+                         <div class="card  must-read-card" style="height: 400px">
+                        <div class="card-body">
+                            <h3 class="card-title">Why <b class="text-info">Top10</b> your decision</h3>
+                            <div class="card-body">
+                                <h5 class="text-info"> Compare </h5>
+                                <p class="mb-3"> We find 10 best options.</p>
+                                <h5 class="text-info"> Choose </h5>
+                                <p class="mb-3"> So you make decisions with ease.</p>
+                                <h5 class="text-info"> Celebrate </h5>
+                                <p class="mb-3"> Simple right?</p>
+                            </div>
+                        </div>
+                    </div>
+                                 <div class="card  must-read-card mt-3" style="height: 1150px">
+                        <div class="card-body">
+                            <h5 class="card-title">10 Steps to Shopping With Confidence : </h5>
+                            <div class="card-body">
+                               <p class="card-text"><b>01 Hope, dream, think:</b> What need will the purchase solve?</p>
+                                <p class="card-text"><b>02 Determine:</b> What aspects of product can be compared?</p>
+                                <p class="card-text"><b>03 Research: </b> Who are the leading brands? What od they offer?</p>
+                                <p class="card-text"><b>04 Consider: </b> Which features are most important for you?</p>
+                                <p class="card-text"><b>05 Read, watch, consult: </b> What do the reviews say? What do experts recommend?</p>
+                                <p class="card-text"><b>06 Compare: </b> How do the brands on your shortlist stack up head-to-head?</p>
+                                <p class="card-text"><b>07 Check prices: </b> What special deals can you take advantage of></p>
+                                <p class="card-text"><b>08 Read the fine print: </b>Are you comfortable with the terms and condition offered?</p>
+                                <p class="card-text"><b>09 Choose confidently: </b> Once you've followed these steps - you should be ready to buy.</p>
+                                <p class="card-text"><b>10 Trust: </b> You have made an educated decision that responds to your needs.</p>
+                            </div>
+                        </div>
+                    </div>
+        </div>
+            </div>
+    {% else %}
+        <h1> Wait until admin would create some posts... </h1>
+    {% endif %}
+
+{% endblock %}

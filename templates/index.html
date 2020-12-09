@@ -1,0 +1,80 @@
+
+
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Welocme to Top10.com {% endblock %}
+
+
+{% block content %}
+
+        {% if output %}
+            <div class="row mb-5">
+                <div class="col-9">
+                    <div class="card">
+                        <div class="card-body">
+                            <a href="{% url 'top10:detail' output.id %}" class="navbar-link ltr card-link" style="text-decoration: none;"><h5 class="card-title">{{ output.subject }}</h5></a>
+                            <p class="card-text">{{ output.title_description }}</p>
+                            <p class="card-text">Created - {{ output.date_created }}</p>
+                        </div>
+                        <img class="card-img-bottom" src="{{ output.picture_main.url}}" alt="Card image">
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="card  must-read-card">
+                        <div class="card-body">
+                            <h5 class="card-title">Must read: </h5>
+                            {% for i in posts %}
+                                {% if i.importance == 'Must read' %}
+                                    <a href="{% url 'top10:detail' i.id %}" class="text-dark"> {{ i.subject }}</a>
+                                {% else %}
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="card must-read-card mt-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Hot this week: </h5>
+                            {% for i in posts %}
+                                {% if i.importance == 'Hot this week' %}
+                                    <a href="{% url 'top10:detail' i.id %}" class="text-dark"> {{ i.subject }}</a>
+                                {% else %}
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-12 d-flex justify-content-start align-items-center">
+                    <h1>Top trending lists:</h1>
+                </div>
+
+            </div>
+            {% for i in posts %}
+
+                {% if i.importance == 'Trending' %}
+                    <hr>
+                    <div class="row">
+
+                        <div class="col-1 d-flex justify-content-center align-items-center">
+                            <h1> <i class="far fa-check"></i></h1>
+                        </div>
+                        <div class="col-7 d-flex justify-content-start align-items-center">
+                            <h4><b><a class=" text-muted" href="#">{{ i.subject }}</a></b></h4>
+                        </div>
+                        <div class="col-4 d-flex justify-content-end align-items-center">
+                            <img src="{{ i.picture_main.url }}" alt="preview" height="150px" width="75%">
+                        </div>
+
+                    </div>
+                    {% else %}
+                {% endif %}
+            {% endfor %}
+
+        {% else %}
+            <h1> Sorry no posts right now </h1>
+        {% endif %}
+
+
+{% endblock %}

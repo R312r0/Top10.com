@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'top10/index.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'top10/tech.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'top10/log-in.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'top10/register.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'top10/detail.css' %}">
+    <link rel="shortcut icon" type="x-icon" href="{% static 'top10/img/favicon.ico' %}"/>
+    <title> {% block title %} {% endblock %} </title>
+</head>
+<body>
+
+    <div class="container-fluid">
+        <header class="blog-header py-3 navigation-bar">
+            <div class="row">
+              <div class="col-3 d-flex justify-content-center align-items-center">
+                   {% if user.is_authenticated %}
+                       <h4 class="text-white">Hello, {{ request.user }} </h4>
+                  {% endif %}
+              </div>
+              <div class="col-6 d-flex justify-content-center align-items-center">
+                    <img src="{% static 'top10/img/logo-white.png' %}" height="100px">
+              </div>
+              <div class="col-3 d-flex justify-content-center align-items-center">
+                      {% if user.is_authenticated %}
+                          <a href="{% url 'top10:log-out' %}" class="btn btn-info"><i class="fas fa-sign-out-alt"></i></a>
+                      {% else %}
+                          <a class="btn btn-sm btn-outline-light sign-up-button" href="{% url 'top10:log-in' %}">Sign up</a>
+                      {% endif %}
+              </div>
+            </div>
+      </header>
+    </div>
+    <div class="container">
+        <div class="nav-scroller py-1 mb-5">
+                <nav class="shift">
+                <ul>
+
+                  <li><a class="p-2 text-muted navbar-link ltr" style="text-decoration: none;" href="{% url 'top10:index' %}"><i class="fas fa-home"></i> Home</a></li>
+                  <li><a class="p-2 text-muted navbar-link ltr" style="text-decoration: none;" href="{% url 'top10:tech' %}"><i class="fas fa-server"></i> Tech</a></li>
+                  <li><a class="p-2 text-muted navbar-link ltr" style="text-decoration: none;" href="{% url 'top10:finance' %}"><i class="fas fa-money-check-alt"></i> Finances</a></li>
+                  <li><a class="p-2 text-muted navbar-link ltr" style="text-decoration: none;" href="{% url 'top10:health' %}"><i class="fas fa-file-medical"></i> Health</a></li>
+                  <li><a class="p-2 text-muted navbar-link ltr" style="text-decoration: none;" href="{% url 'top10:lifestyle' %}"><i class="fas fa-hand-spock"></i> Lifestyle</a></li>
+                  <li><a class="p-2 text-muted navbar-link ltr" style="text-decoration: none;" href="{% url 'top10:family' %}"><i class="fas fa-child"></i> Family</a></li>
+                  <li><a class="p-2 text-muted navbar-link ltr" style="text-decoration: none;" href="{% url 'top10:business' %}"><i class="fas fa-business-time"></i> Business Tools</a></li>
+                  <li><a class="p-2 text-muted navbar-link ltr" style="text-decoration: none;" href="{% url 'top10:shopping' %}"><i class="fas fa-tags"></i> Shopping</a></li>
+                  <li><a class="p-2 text-muted navbar-link ltr" style="text-decoration: none;" href="{% url 'top10:entertainment' %}"><i class="fas fa-gamepad"></i> Entertainment</a></li>
+                  <li><a class="p-2 text-muted navbar-link ltr" style="text-decoration: none;" href="{% url 'top10:personal_growth' %}"><i class="fas fa-level-up-alt"></i> Personal Growth</a></li>
+                </ul>
+                </nav>
+              </div>
+
+        {% block content %} {% endblock %}
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

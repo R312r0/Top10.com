@@ -1,0 +1,198 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ main_post.subject }} {% endblock %}
+
+{% block content %}
+
+
+<div class="container-fluid mb-5 header-container">
+    <div class="row">
+        <div class="col-3">
+            <div class="jumbotron">
+                <div class="row mb-3">
+                    <div class="col-12 d-flex justify-content-start align-items-center">
+                        <h5> Jump to : </h5>
+                    </div>
+                </div>
+                <hr>
+            {% for i in output %}
+                <div class="row mb-3">
+                    {{ i.place_in_top }}. <a href="#{{ i.item_name }}" class="text-info pl-2" style="white-space: nowrap">{{ i.item_name }}</a>
+                </div>
+             {% endfor %}
+            </div>
+        </div>
+        <div class="col-9">
+            <img src="{{ main_post.picture_main.url }}" width="100%" height="100%">
+                <div class="text-block-image">
+                    <div class="container-fluid">
+                        <div class="row text-row-header">
+                            <div class="col-12 d-flex justify-content-center align-items-center">
+                                <h1><b> {{ main_post.title_description }}</b></h1>
+                            </div>
+                        </div>
+
+                            <h6 class="text-info date-of-post">Post was created {{ main_post.date_created }}</h6>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
+    <table class="table table-bordered">
+  <thead class="thead-dark">
+    <tr>
+          <th scope="col">#</th>
+            <th scope="col">{{ main_post.item_name }}</th>
+                {% for x in main_post.tablerow_set.all %}
+
+                    <th scope="col"> {{ x.table_row }} </th>
+
+                 {% endfor %}
+
+
+    </tr>
+  </thead>
+  <tbody>
+    {% for i in output %}
+        <tr>
+          <th scope="row">{{ i.place_in_top }}</th>
+          <td>{{ i.item_name  }}</td>
+            {% for x in i.tablevalue_set.all %}
+                <td>{{ x.table_value }} </td>
+
+            {% endfor %}
+        </tr>
+    {% endfor %}
+  </tbody>
+</table>
+    <div class="container">
+        <div class="row">
+            <div class="card" style="border: 0;">
+                <div class="card-body">
+                    {{  main_post.post_description | safe}}
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+    {% if output %}
+        {% for i in output %}
+            <div class="row" id="{{ i.item_name }}">
+                <div class="col-1 d-flex align-items-center">
+                    <h1>{{ i.place_in_top }}.</h1>
+                </div>
+                <div class="col-9 d-flex justify-content-start align-items-center">
+                    <h3> {{ i.item_name }} </h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-11 offset-1 d-flex justify-content-start align-items-center pl-4 text-secondary">
+                    <h4> {{ i.item_title }} </h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 d-flex justify-content-center align-items-center">
+                    <div class="card" style="border: 0">
+                         <img class="card-img-top" src="{{ i.item_picture.url }}" alt="Card image cap" style="width: auto; height: 500px; border: 0;">
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="row mb-5">
+                <h4> Benefits: </h4>
+                {% for ben in i.benefits_set.all %}
+                    <div class="col-12 d-flex justify-content-start align-items-center">
+                        <h5 class="text-success"><i class="fas fa-check pr-3"></i>{{ ben.benefit_title }} - {{ ben.benefit_desc }}</h5>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="card" style="border: 0;">
+                <div class="card-body">
+                    {{  i.description | safe}}
+                </div>
+            </div>
+
+            <div class="row mt-3 post-pre-footer">
+
+                <div class="col-6 d-flex justify-content-center align-items-center">
+                    <h4> {{ i.item_name }} </h4>
+                </div>
+                <div class="col-6 d-flex justify-content-center align-items-center">
+                    <a type="button" class="btn btn-info" href="{{ i.item_link }}"> Go to website </a>
+                </div>
+
+            </div>
+
+
+            <div class="row mb-5">
+                <div class="col-6">
+                    <h4> Pros : </h4>
+                    <ul class="list-group list-group-flush">
+                        {% for pr in i.pros_set.all %}
+                            <li class="list-group-item "><i class="fas fa-check text-success pr-3"></i>{{ pr.pros_title }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="col-6">
+                    <h4> Cons : </h4>
+                    <ul class="list-group list-group-flush">
+                        {% for co in i.cons_set.all %}
+                            <li class="list-group-item"><i class="fas fa-times text-danger pr-3"></i>{{ co.cons_title }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+            </div>
+
+
+        {% endfor %}
+
+        {##}
+        <div class="jumbotron mt-5">
+            <div class="row">
+                <div class="col-4 d-flex align-items-center">
+                    <h3 class="text-info">Total comments {{ comments_count }}</h3>
+                </div>
+                <div class="col-8 d-flex align-items-center justify-content-end">
+                    <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#commentsCollapse" aria-expanded="false" aria-controls="commentsCollapse" > Show comments </button>
+                </div>
+            </div>
+            <div class="collapse" id="commentsCollapse">
+                {% for i in comments %}
+                <div class="card card-body mt-3">
+                    <p>User <b class="text-info">{{ i.user_name }}</b> says.. </p>
+                    <h4> {{ i.comment_text }} </h4>
+                </div>
+
+                {% endfor %}
+            </div>
+        </div>
+
+
+
+        {% if user.is_authenticated %}
+
+                    <form action="{% url 'top10:leave_comment' post_slug %}" method="POST">
+                        {% csrf_token %}
+                        <div class="form-group mt-5">
+                            <textarea name="text" required class="form-control" placeholder="Enter comment here "></textarea>
+                        </div>
+                        <div class="col-12 d-flex justify-content-end align-items-center">
+                            <button type="submit" class="btn btn-info mt-3 mb-5">Leave a comment</button>
+                        </div>
+                    </form>
+        {% else %}
+            <div class="alert alert-warning mb-5" role="alert">
+                <h4> If you want to leave or see the comment please log-in or sign-up !</h4>
+            </div>
+
+        {% endif %}
+
+    {% else %}
+            <h1> No top right now wait until admin will create it  </h1>
+    {% endif %}
+
+{% endblock %}

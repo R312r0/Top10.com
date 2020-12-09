@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Registration
+{% endblock %}
+
+{% block content %}
+<div class="card bg-light">
+<article class="card-body mx-auto" style="max-width: 400px;">
+	<h4 class="card-title mt-3 text-center">Create Account</h4>
+	<p class="text-center">Get started with your free account</p>
+
+	<form method="POST" action="">
+        {% csrf_token %}
+	<div class="form-group input-group">
+		<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+		 </div>
+                {{ form.username }}
+    </div> <!-- form-group// -->
+    <div class="form-group input-group">
+    	<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+		 </div>
+                {{ form.email }}
+    </div> <!-- form-group// -->
+    <div class="form-group input-group">
+    	<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+		</div>
+            {{ form.password1 }}
+    </div> <!-- form-group// -->
+    <div class="form-group input-group">
+    	<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+		</div>
+            {{ form.password2 }}
+    </div> <!-- form-group// -->
+    <div class="form-group">
+        <button type="submit" class="btn btn-info btn-block"> Create Account  </button>
+    </div> <!-- form-group// -->
+    <p class="text-center">Have an account? <a href="{% url 'top10:log-in' %}">Log In</a> </p>
+</form>
+    {{ form.errors }}
+</article>
+</div>
+    <script>
+
+    const form_fields = document.getElementsByTagName("input")
+    form_fields[1].placeholder='Username..'
+    form_fields[2].placeholder='Email..'
+    form_fields[3].placeholder='Password..'
+    form_fields[4].placeholder='Repeat password..'
+
+    for (let field in form_fields) {
+        form_fields[field].className += 'form-control'
+    }
+
+    </script>
+{% endblock %}
