@@ -1,1 +1,1 @@
-web: gunicorn task_tracker.wsgi --log-file -
+web: gunicorn top10.wsgi --log-file -
